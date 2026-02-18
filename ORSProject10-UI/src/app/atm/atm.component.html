@@ -1,0 +1,136 @@
+<app-navbar></app-navbar>
+
+<style>
+  .grad {
+    background-image: linear-gradient(to bottom right, rgb(32, 168, 168), rgb(219, 231, 237));
+    padding-bottom: 25px;
+  }
+
+  .background {
+    padding-top: 3%;
+    padding-bottom: 13%;
+    background: url('assets/files/wall.jpg') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  .required-field {
+    color: red;
+  }
+
+  .alertRedColor {
+    color: red;
+  }
+</style>
+
+<div class="container-fluid background" style="padding-top:12%">
+  <div class="row justify-content-center">
+    <div class="col-sm-8 col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-body shadow-lg grad">
+
+          <!-- IMPORTANT CHANGE -->
+          <form #f="ngForm" (ngSubmit)="submit()">
+
+            <h2 *ngIf="!form.data.id" class="text-primary text-center font-weight-bold">
+              Add ATM
+            </h2>
+
+            <h2 *ngIf="form.data.id" class="text-primary text-center font-weight-bold">
+              Update ATM
+            </h2>
+
+            <!-- GLOBAL MESSAGE -->
+            <div *ngIf="form.error && form.message" class="alert alert-danger">
+              {{ form.message }}
+            </div>
+
+            <div *ngIf="!form.error && form.message" class="alert alert-success">
+              {{ form.message }}
+            </div>
+
+            <!-- Location -->
+            <div class="form-group pt-2">
+              <label><b>Location</b><span class="required-field">*</span></label>
+
+              <select class="form-control" name="location" [(ngModel)]="form.data.location" required>
+                <option [ngValue]="null">Select Location</option>
+                <option *ngFor="let l of form.preload?.locationList | keyvalue" [value]="l.value">
+                  {{ l.value }}
+                </option>
+              </select>
+
+              <span *ngIf="form.inputerror.location" class="alertRedColor">
+                {{ form.inputerror.location }}
+              </span>
+            </div>
+
+            <!-- Cash Available -->
+            <div class="form-group pt-2">
+              <label><b>Cash Available</b><span class="required-field">*</span></label>
+
+              <input type="number"
+                     name="cashAvailable"
+                     [(ngModel)]="form.data.cashAvailable"
+                     class="form-control"
+                     required
+                     placeholder="Enter cash amount">
+
+              <span *ngIf="form.inputerror.cashAvailable" class="alertRedColor">
+                {{ form.inputerror.cashAvailable }}
+              </span>
+            </div>
+
+            <!-- Date -->
+            <div class="form-group pt-2">
+              <label><b>Date</b><span class="required-field">*</span></label>
+
+              <input type="date"
+                     name="dob"
+                     [(ngModel)]="form.data.dob"
+                     class="form-control"
+                     required>
+
+              <span *ngIf="form.inputerror.dob" class="alertRedColor">
+                {{ form.inputerror.dob }}
+              </span>
+            </div>
+
+            <!-- Remark -->
+            <div class="form-group pt-2">
+              <label><b>Remark</b><span class="required-field">*</span></label>
+
+              <textarea class="form-control"
+                        name="remark"
+                        [(ngModel)]="form.data.remark"
+                        required
+                        rows="3"></textarea>
+
+              <span *ngIf="form.inputerror.remark" class="alertRedColor">
+                {{ form.inputerror.remark }}
+              </span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="text-center pt-3">
+
+              <!-- IMPORTANT: submit type -->
+              <button type="submit" class="btn btn-success mr-2">
+                {{ form.data.id ? 'Update' : 'Save' }}
+              </button>
+
+              <a class="btn btn-warning" [routerLink]="['/atmlist']">
+                List
+              </a>
+
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

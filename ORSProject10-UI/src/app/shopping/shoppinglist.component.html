@@ -1,0 +1,138 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid" style="padding-top:12%">
+
+  <h2 class="text-primary text-center">Shopping List</h2>
+
+  <!-- ================= SEARCH ROW ================= -->
+  <div class="row justify-content-center mb-3">
+
+    <!-- Product Name -->
+    <div class="col-sm-2">
+      <input class="form-control" [(ngModel)]="form.searchParams.productName" placeholder="Product Name">
+    </div>
+
+    <!-- Product Price -->
+    <div class="col-sm-2">
+      <input type="number" class="form-control" [(ngModel)]="form.searchParams.productPrice"
+        placeholder="Product Price">
+    </div>
+
+
+
+    <!-- Purchase Date -->
+    <div class="col-sm-2">
+      <input type="date" class="form-control" [(ngModel)]="form.searchParams.dob">
+    </div>
+
+    <div class="col-sm-2">
+
+      <select class="form-control" [(ngModel)]="form.searchParams.shopName" name="shopName">
+
+        <!-- Default Option -->
+        <option [ngValue]="undefined">Select Shop</option>
+
+        <!-- Preload Shop List -->
+        <option *ngFor="let s of form.preload?.shopNameList | keyvalue" [value]="s.value">
+          {{ s.value }}
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <!-- Search -->
+    <div class="col-sm-1">
+      <button class="btn btn-primary w-100" (click)="submit()">
+        Search
+      </button>
+    </div>
+
+    <!-- Add -->
+    <div class="col-sm-1">
+      <button class="btn btn-success w-100" (click)="forward('/shopping')">
+        Add
+      </button>
+    </div>
+
+    <!-- Delete -->
+    <div class="col-sm-1">
+      <button class="btn btn-danger w-100" (click)="deleteMany()">
+        Delete
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ================= MESSAGES ================= -->
+  <div *ngIf="form.error" class="alert alert-danger text-center">
+    {{ form.message }}
+  </div>
+
+  <div *ngIf="!form.error && form.message" class="alert alert-success text-center">
+    {{ form.message }}
+  </div>
+
+  <!-- ================= TABLE ================= -->
+  <table class="table table-bordered table-dark text-center">
+    <thead>
+      <tr>
+        <th>
+          <input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll($event)">
+        </th>
+        <th>S.No</th>
+        <th>Product Name</th>
+        <th>Product Price</th>
+        <th>Shop Name</th>
+        <th>Purchase Date</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let m of form.list; let i = index">
+
+        <td>
+          <input type="checkbox" #checkboxes [id]="m.id" (change)="checklistUpdate()">
+        </td>
+
+        <!-- Serial Number -->
+        <td>{{ (form.pageNo * 5) + i + 1 }}</td>
+
+        <td>{{ m.productName }}</td>
+        <td>{{ m.productPrice }}</td>
+        <td>{{ m.shopName }}</td>
+
+        <!-- DATE -->
+        <td>{{ m.dob | date:'yyyy-MM-dd' }}</td>
+
+        <td>
+          <button class="fa fa-edit text-primary" (click)="forward('/shopping/' + m.id)">
+          </button>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ================= PAGINATION ================= -->
+  <div class="d-flex justify-content-between mt-3">
+
+    <button class="btn btn-info" (click)="previous()" [disabled]="form.pageNo == 0">
+      Previous
+    </button>
+
+    <button class="btn btn-warning" (click)="exit()">
+      Reset
+    </button>
+
+    <button class="btn btn-info" (click)="next()" [disabled]="nextList == 0">
+      Next
+    </button>
+
+  </div>
+
+</div>
+
+<app-footer></app-footer>

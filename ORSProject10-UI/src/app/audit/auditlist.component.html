@@ -1,0 +1,106 @@
+<app-navbar></app-navbar>
+
+<div class="content-wrapper" style="padding-top:12%">
+  <div class="container-fluid">
+
+    <h1 class="text-primary text-center">Audit List</h1>
+
+    <!-- Search -->
+    <div class="row search-inputs p-2 justify-content-center">
+
+      <div class="col-sm-2">
+        <input class="form-control" [(ngModel)]="form.searchParams.actionType" placeholder="Action Type">
+      </div>
+
+      <div class="col-sm-2">
+        <input class="form-control" [(ngModel)]="form.searchParams.actionBy" placeholder="Action By">
+      </div>
+
+      <div class="col-sm-2">
+        <select class="form-control" [(ngModel)]="form.searchParams.actionResult">
+          <option [ngValue]="undefined">Result</option>
+          <option *ngFor="let r of form.preload?.resultList | keyvalue" [value]="r.value">
+            {{ r.value }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-sm-1">
+        <button class="btn btn-primary w-100" (click)="submit()">Search</button>
+      </div>
+
+      <div>
+        <button class="btn btn-success w-100" (click)="forward('/audit')">
+          Add Audit
+        </button>
+      </div>
+
+      <div class="col-sm-1">
+        <button class="btn btn-danger w-100" (click)="deleteMany()">Delete</button>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div *ngIf="form.error && form.message" class="alert alert-danger alert-dismissible fade show">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ form.message }}
+    </div>
+
+    <div *ngIf="!form.error && form.message" class="alert alert-success alert-dismissible fade show">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ form.message }}
+    </div>
+
+    <!-- Table -->
+    <table class="table table-bordered table-dark mt-3">
+      <thead>
+        <tr align="center">
+          <th>
+            <input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll($event)">
+          </th>
+          <th>S.No</th>
+          <th>Action</th>
+          <th>By</th>
+          <th>Time</th>
+          <th>Result</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let a of form.list; let i=index" align="center">
+          <td>
+            <input type="checkbox" #checkboxes [id]="a.id" (change)="checklistUpdate()">
+          </td>
+          <td>{{ (form.pageNo * 5) + i + 1 }}</td>
+          <td>{{ a.actionType }}</td>
+          <td>{{ a.actionBy }}</td>
+          <td>{{ a.actionTime }}</td>
+          <td>{{ a.actionResult }}</td>
+          <td>
+            <button class="fa fa-edit text-primary" (click)="forward('/audit/' + a.id)">
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-between mt-3">
+      <button class="btn btn-info" (click)="previous()" [disabled]="form.pageNo == 0">
+        Previous
+      </button>
+
+      <a class="btn btn-warning" (click)="exit()">
+        Reset
+      </a>
+
+      <button class="btn btn-info" (click)="next()" [disabled]="nextList == 0">
+        Next
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<app-footer></app-footer>

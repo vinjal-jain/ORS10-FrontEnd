@@ -1,0 +1,270 @@
+<app-navbar></app-navbar>
+
+<style>
+  .grad {
+    background-image: linear-gradient(to bottom right, rgb(32, 168, 168), rgb(219, 231, 237));
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding-bottom: 25px;
+  }
+
+  .background {
+    padding-top: 3%;
+    padding-bottom: 13%;
+    background: url('assets/files/wall.jpg') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+  }
+
+  .required-field {
+    color: red;
+  }
+
+  .alertRedColor {
+    color: red;
+  }
+</style>
+
+<div class="container-fluid background" style="padding-top:12%">
+  <div class="row justify-content-center">
+    <div class="col-sm-8 col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-body shadow-lg grad">
+
+          <form name="activityForm">
+
+            <h2 *ngIf="!form.data.id" class="text-primary font-weight-bold text-center">
+              Add Activity
+            </h2>
+            <h2 *ngIf="form.data.id" class="text-primary font-weight-bold text-center">
+              Update Activity
+            </h2>
+
+            <!-- Messages -->
+            <div *ngIf="form.error && form.message" class="alert alert-danger alert-dismissible fade show">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ form.message }}
+            </div>
+
+            <div *ngIf="!form.error && form.message" class="alert alert-success alert-dismissible fade show">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ form.message }}
+            </div>
+
+            <!-- Activity Name -->
+            <div class="form-group pt-2">
+              <label><b>Activity Name</b><span class="required-field">*</span></label>
+              <input type="text" name="activityName" [(ngModel)]="form.data.activityName" class="form-control"
+                placeholder="Enter Activity Name">
+              <span *ngIf="form.inputerror.activityName" class="alertRedColor">
+                {{ form.inputerror.activityName }}
+              </span>
+            </div>
+
+            <!-- Performed By -->
+            <div class="form-group pt-2">
+              <label><b>Performed By</b><span class="required-field">*</span></label>
+              <input type="text" name="performedBy" [(ngModel)]="form.data.performedBy" class="form-control"
+                placeholder="Enter Performer Name">
+              <span *ngIf="form.inputerror.performedBy" class="alertRedColor">
+                {{ form.inputerror.performedBy }}
+              </span>
+            </div>
+
+            <!-- Activity Time -->
+            <div class="form-group pt-2">
+              <label><b>Activity Time</b><span class="required-field">*</span></label>
+              <input type="datetime-local" name="activityTime"
+                [value]="form.data.activityTime | date:'yyyy-MM-ddTHH:mm'"
+                (input)="form.data.activityTime=parseDate($event.target.value)" class="form-control">
+              <span *ngIf="form.inputerror.activityTime" class="alertRedColor">
+                {{ form.inputerror.activityTime }}
+              </span>
+            </div>
+
+            <!-- Status -->
+            <div class="form-group pt-2">
+              <label><b>Status</b><span class="required-field">*</span></label>
+              <select class="form-control" name="activityStatus" [(ngModel)]="form.data.activityStatus">
+                <option [ngValue]="undefined">Select Status</option>
+                <option *ngFor="let s of form.preload.activityStatusList | keyvalue" [value]="s.value">
+                  {{ s.value }}
+                </option>
+              </select>
+              <span *ngIf="form.inputerror.activityStatus" class="alertRedColor">
+                {{ form.inputerror.activityStatus }}
+              </span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="row pt-2 pl-2 pb-3">
+              <div class="col-md-3"></div>
+
+              <div class="pt-2">
+                <button *ngIf="!form.data.id > 0" (click)="submit()" class="btn btn-success mr-2">
+                  Save
+                </button>
+              </div>
+
+              <div class="col-md-1"></div>
+
+              <div class="pt-2">
+                <button *ngIf="form.data.id > 0" (click)="submit()" class="btn btn-success mr-2">
+                  Update
+                </button>
+              </div>
+
+              <div class="pt-2">
+                <a class="btn btn-warning mr-1" [routerLink]="['/activitylist']"
+                  style="color:white;text-decoration:none">
+                  List
+                </a>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+<app-navbar></app-navbar>
+
+<style>
+  .grad {
+    background-image: linear-gradient(to bottom right, rgb(32, 168, 168), rgb(219, 231, 237));
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding-bottom: 25px;
+  }
+
+  .background {
+    padding-top: 3%;
+    padding-bottom: 13%;
+    background: url('assets/files/wall.jpg') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+  }
+
+  .required-field {
+    color: red;
+  }
+
+  .alertRedColor {
+    color: red;
+  }
+</style>
+
+<div class="container-fluid background" style="padding-top:12%">
+  <div class="row justify-content-center">
+    <div class="col-sm-8 col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-body shadow-lg grad">
+
+          <form name="activityForm">
+
+            <h2 *ngIf="!form.data.id" class="text-primary font-weight-bold text-center">
+              Add Activity
+            </h2>
+            <h2 *ngIf="form.data.id" class="text-primary font-weight-bold text-center">
+              Update Activity
+            </h2>
+
+            <!-- Messages -->
+            <div *ngIf="form.error && form.message" class="alert alert-danger alert-dismissible fade show">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ form.message }}
+            </div>
+
+            <div *ngIf="!form.error && form.message" class="alert alert-success alert-dismissible fade show">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ form.message }}
+            </div>
+
+            <!-- Activity Name -->
+            <div class="form-group pt-2">
+              <label><b>Activity Name</b><span class="required-field">*</span></label>
+              <input type="text" name="activityName" [(ngModel)]="form.data.activityName" class="form-control"
+                placeholder="Enter Activity Name">
+              <span *ngIf="form.inputerror.activityName" class="alertRedColor">
+                {{ form.inputerror.activityName }}
+              </span>
+            </div>
+
+            <!-- Performed By -->
+            <div class="form-group pt-2">
+              <label><b>Performed By</b><span class="required-field">*</span></label>
+              <input type="text" name="performedBy" [(ngModel)]="form.data.performedBy" class="form-control"
+                placeholder="Enter Performer Name">
+              <span *ngIf="form.inputerror.performedBy" class="alertRedColor">
+                {{ form.inputerror.performedBy }}
+              </span>
+            </div>
+
+            <!-- Activity Time -->
+            <div class="form-group pt-2">
+              <label><b>Activity Time</b><span class="required-field">*</span></label>
+              <input type="datetime-local" name="activityTime"
+                [value]="form.data.activityTime | date:'yyyy-MM-ddTHH:mm'"
+                (input)="form.data.activityTime=parseDate($event.target.value)" class="form-control">
+              <span *ngIf="form.inputerror.activityTime" class="alertRedColor">
+                {{ form.inputerror.activityTime }}
+              </span>
+            </div>
+
+            <!-- Status -->
+            <div class="form-group pt-2">
+              <label><b>Status</b><span class="required-field">*</span></label>
+              <select class="form-control" name="activityStatus" [(ngModel)]="form.data.activityStatus">
+                <option [ngValue]="undefined">Select Status</option>
+                <option *ngFor="let s of form.preload.activityStatusList | keyvalue" [value]="s.value">
+                  {{ s.value }}
+                </option>
+              </select>
+              <span *ngIf="form.inputerror.activityStatus" class="alertRedColor">
+                {{ form.inputerror.activityStatus }}
+              </span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="row pt-2 pl-2 pb-3">
+              <div class="col-md-3"></div>
+
+              <div class="pt-2">
+                <button *ngIf="!form.data.id > 0" (click)="submit()" class="btn btn-success mr-2">
+                  Save
+                </button>
+              </div>
+
+              <div class="col-md-1"></div>
+
+              <div class="pt-2">
+                <button *ngIf="form.data.id > 0" (click)="submit()" class="btn btn-success mr-2">
+                  Update
+                </button>
+              </div>
+
+              <div class="pt-2">
+                <a class="btn btn-warning mr-1" [routerLink]="['/activitylist']"
+                  style="color:white;text-decoration:none">
+                  List
+                </a>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

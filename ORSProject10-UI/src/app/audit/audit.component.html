@@ -1,0 +1,143 @@
+<app-navbar></app-navbar>
+
+<style>
+  .grad {
+    background-image: linear-gradient(to bottom right, rgb(32,168,168), rgb(219,231,237));
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding-bottom: 25px;
+  }
+  .background {
+    padding-top: 3%;
+    padding-bottom: 13%;
+    background: url('assets/files/wall.jpg') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  .required-field { color: red; }
+  .alertRedColor { color: red; }
+</style>
+
+<div class="container-fluid background" style="padding-top:12%">
+  <div class="row justify-content-center">
+    <div class="col-sm-8 col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-body shadow-lg grad">
+
+          <form name="auditForm" novalidate>
+
+            <h2 *ngIf="!form.data.id" class="text-primary text-center font-weight-bold">
+              Add Audit
+            </h2>
+            <h2 *ngIf="form.data.id" class="text-primary text-center font-weight-bold">
+              Update Audit
+            </h2>
+
+            <!-- Messages -->
+            <div *ngIf="form.error && form.message"
+                 class="alert alert-danger alert-dismissible fade show">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ form.message }}
+            </div>
+
+            <div *ngIf="!form.error && form.message"
+                 class="alert alert-success alert-dismissible fade show">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ form.message }}
+            </div>
+
+            <!-- Action Type -->
+            <div class="form-group pt-2">
+              <label><b>Action Type</b><span class="required-field">*</span></label>
+              <input type="text" name="actionType"
+                     [(ngModel)]="form.data.actionType"
+                     class="form-control"
+                     placeholder="Enter Action Type">
+              <span *ngIf="form.inputerror.actionType" class="alertRedColor">
+                {{ form.inputerror.actionType }}
+              </span>
+            </div>
+
+            <!-- Action By -->
+            <div class="form-group pt-2">
+              <label><b>Action By</b><span class="required-field">*</span></label>
+              <input type="text" name="actionBy"
+                     [(ngModel)]="form.data.actionBy"
+                     class="form-control"
+                     placeholder="Performed By">
+              <span *ngIf="form.inputerror.actionBy" class="alertRedColor">
+                {{ form.inputerror.actionBy }}
+              </span>
+            </div>
+
+            <!-- Action Time -->
+            <div class="form-group pt-2">
+              <label><b>Action Time</b><span class="required-field">*</span></label>
+              <input type="datetime-local"
+                     name="actionTime"
+                     (input)="form.data.actionTime=parseDate($event.target.value)"
+                     class="form-control">
+              <span *ngIf="form.inputerror.actionTime" class="alertRedColor">
+                {{ form.inputerror.actionTime }}
+              </span>
+            </div>
+
+            <!-- Action Result -->
+            <div class="form-group pt-2">
+              <label><b>Action Result</b><span class="required-field">*</span></label>
+              <select class="form-control"
+                      name="actionResult"
+                      [(ngModel)]="form.data.actionResult">
+                <option [ngValue]="undefined">Select Result</option>
+                <option *ngFor="let r of form.preload?.resultList | keyvalue"
+                        [value]="r.value">
+                  {{ r.value }}
+                </option>
+              </select>
+              <span *ngIf="form.inputerror.actionResult" class="alertRedColor">
+                {{ form.inputerror.actionResult }}
+              </span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="row pt-2 pb-3">
+              <div class="col-md-3"></div>
+
+              <div class="pt-2">
+                <button type="button"
+                        *ngIf="!form.data.id"
+                        (click)="submit()"
+                        class="btn btn-success mr-2">
+                  Save
+                </button>
+              </div>
+
+              <div class="col-md-1"></div>
+
+              <div class="pt-2">
+                <button type="button"
+                        *ngIf="form.data.id"
+                        (click)="submit()"
+                        class="btn btn-success mr-2">
+                  Update
+                </button>
+              </div>
+
+              <div class="pt-2">
+                <a class="btn btn-warning mr-1"
+                   [routerLink]="['/auditlist']"
+                   style="color:white;text-decoration:none">
+                  List
+                </a>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

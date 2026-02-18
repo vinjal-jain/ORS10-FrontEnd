@@ -1,0 +1,160 @@
+<app-navbar></app-navbar>
+
+<style>
+  .grad {
+    background-image: linear-gradient(to bottom right, rgb(32, 168, 168), rgb(219, 231, 237));
+    padding-bottom: 25px;
+  }
+
+  .background {
+    padding-top: 3%;
+    padding-bottom: 13%;
+    background: url('assets/files/wall.jpg') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  .required-field {
+    color: red;
+  }
+
+  .alertRedColor {
+    color: red;
+  }
+</style>
+
+<div class="container-fluid background" style="padding-top:12%">
+  <div class="row justify-content-center">
+    <div class="col-sm-8 col-md-6 col-lg-4">
+
+      <div class="card">
+        <div class="card-body shadow-lg grad">
+
+          <!-- FORM -->
+          <form #f="ngForm" (ngSubmit)="submit()">
+
+            <!-- TITLE -->
+            <h2 *ngIf="!form.data.id" class="text-primary text-center font-weight-bold">
+              Add Shopping
+            </h2>
+
+            <h2 *ngIf="form.data.id" class="text-primary text-center font-weight-bold">
+              Update Shopping
+            </h2>
+
+            <!-- MESSAGE -->
+            <div *ngIf="form.error && form.message" class="alert alert-danger">
+              {{ form.message }}
+            </div>
+
+            <div *ngIf="!form.error && form.message" class="alert alert-success">
+              {{ form.message }}
+            </div>
+
+            <!-- ================= PRODUCT NAME ================= -->
+            <div class="form-group pt-2">
+              <label>
+                <b>Product Name</b>
+                <span class="required-field">*</span>
+              </label>
+
+              <input type="text" name="productName" [(ngModel)]="form.data.productName" class="form-control" required
+                maxlength="50" placeholder="Enter Product Name" (keypress)="allowOnlyAlphabets($event)">
+
+              <span *ngIf="form.inputerror.productName" class="alertRedColor">
+                {{ form.inputerror.productName }}
+              </span>
+            </div>
+
+            <!-- ================= PRODUCT PRICE ================= -->
+            <div class="form-group pt-2">
+              <label>
+                <b>Product Price</b>
+                <span class="required-field">*</span>
+              </label>
+
+              <input type="number" name="productPrice" [(ngModel)]="form.data.productPrice" class="form-control"
+                required placeholder="Enter Product Price">
+
+              <span *ngIf="form.inputerror.productPrice" class="alertRedColor">
+                {{ form.inputerror.productPrice }}
+              </span>
+            </div>
+
+            <!-- ================= SHOP NAME (PRELOAD DROPDOWN) ================= -->
+            <div class="form-group pt-2">
+
+              <label>
+                <b>Shop Name</b>
+                <span class="required-field">*</span>
+              </label>
+
+              <div class="input-group">
+
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fa fa-shopping-cart grey-text"></i>
+                  </div>
+                </div>
+
+                <select class="form-control" name="shopName" [(ngModel)]="form.data.shopName" required>
+
+                  <!-- Default Option -->
+                  <option [ngValue]="undefined">
+                    Select Shop
+                  </option>
+
+                  <!-- Preload Data -->
+                  <option *ngFor="let s of form.preload.shopNameList | keyvalue" [value]="s.value">
+                    {{ s.value }}
+                  </option>
+
+                </select>
+
+              </div>
+
+              <!-- Validation Error -->
+              <span *ngIf="form.inputerror.shopName" class="alertRedColor">
+                {{ form.inputerror.shopName }}
+              </span>
+
+            </div>
+
+
+            <!-- ================= PURCHASE DATE ================= -->
+            <div class="form-group pt-2">
+              <label>
+                <b>Purchase Date</b>
+                <span class="required-field">*</span>
+              </label>
+
+              <input type="date" name="dob" [(ngModel)]="form.data.dob" class="form-control" required>
+
+              <span *ngIf="form.inputerror.dob" class="alertRedColor">
+                {{ form.inputerror.dob }}
+              </span>
+            </div>
+
+            <!-- ================= BUTTONS ================= -->
+            <div class="text-center pt-3">
+
+              <button type="submit" class="btn btn-success mr-2">
+                {{ form.data.id ? 'Update' : 'Save' }}
+              </button>
+
+              <a class="btn btn-warning" [routerLink]="['/shoppinglist']">
+                List
+              </a>
+
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
