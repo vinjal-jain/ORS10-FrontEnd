@@ -1,0 +1,126 @@
+<app-navbar></app-navbar>
+
+<style>
+  .content-wrapper {
+    background: url('assets/files/teahu.png') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh;
+    padding: 20px;
+  }
+</style>
+<div class="content-wrapper">
+  <div class="container-fluid" style="padding-top:12%">
+    <h2 class="text-primary text-center font-weight-bold">
+      Resource List
+    </h2>
+
+    <!-- SEARCH -->
+    <div class="row justify-content-center mb-3">
+
+      <div class="col-sm-2">
+        <input type="text" class="form-control" [(ngModel)]="form.searchParams.resourceCode"
+          placeholder="Resource Code">
+      </div>
+
+      <div class="col-sm-2">
+        <input type="text" class="form-control" [(ngModel)]="form.searchParams.resourceName"
+          placeholder="Resource Name">
+      </div>
+
+      <div class="col-sm-1">
+        <button type="button" (click)="submit()" class="btn btn-primary w-100">
+          Search
+        </button>
+      </div>
+
+      <div class="col-sm-2">
+        <button type="button" (click)="forward('/resource')" class="btn btn-success w-100">
+          Add Resource
+        </button>
+      </div>
+
+      <div class="col-sm-2">
+        <button type="button" (click)="deleteMany()" class="btn btn-danger w-100">
+          Delete
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Form error messages -->
+    <div *ngIf="form.error && form.message" class="alert alert-danger alert-dismissible fade show">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ form.message }}
+    </div>
+    <div *ngIf="!form.error && form.message" class="alert alert-success alert-dismissible fade show">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ form.message }}
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-responsive">
+
+      <table class="table table-bordered table-hover table-dark text-center">
+
+        <thead>
+          <tr>
+            <th>
+              <input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll($event)">
+            </th>
+            <th>S.No</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let m of form.list; let i=index">
+
+            <td>
+              <input type="checkbox" #checkboxes [id]="m.id" (change)="checklistUpdate()">
+            </td>
+
+            <td>{{ (form.pageNo * 5) + i + 1 }}</td>
+            <td>{{ m.resourceCode }}</td>
+            <td>{{ m.resourceName }}</td>
+            <td>{{ m.resourceType }}</td>
+            <td>{{ m.resourceStatus }}</td>
+
+            <td>
+              <button class="fa fa-edit text-primary" (click)="forward('/resource/' + m.id)">
+              </button>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <!-- PAGINATION -->
+    <div class="d-flex justify-content-between mt-3">
+
+      <button type="button" (click)="previous()" [disabled]="form.pageNo==0" class="btn btn-info">
+        Previous
+      </button>
+
+      <button type="button" (click)="exit()" class="btn btn-warning">
+        Reset
+      </button>
+
+      <button type="button" (click)="next()" [disabled]="nextList==0" class="btn btn-info">
+        Next
+      </button>
+
+    </div>
+
+  </div>
+</div>
+<app-footer></app-footer>

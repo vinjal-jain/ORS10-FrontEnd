@@ -78,6 +78,8 @@ import { AtmComponent } from './atm/atm.component';
 import { AtmlistComponent } from './atm/atm-list.component';
 import { ShoppingComponent } from './shopping/shopping.component';
 import { ShoppingListComponent } from './shopping/shoppinglist.component';
+import { ResourceComponent } from './resource/resource.component';
+import { ResourcelistComponent } from './resource/resourcelist.component';
 
 
 
@@ -153,7 +155,9 @@ export function myHttpLoader(http: HttpClient) {
     AtmComponent,
     AtmlistComponent,
     ShoppingComponent,
-    ShoppingListComponent
+    ShoppingListComponent,
+    ResourceComponent,
+    ResourcelistComponent
 
 
   ],

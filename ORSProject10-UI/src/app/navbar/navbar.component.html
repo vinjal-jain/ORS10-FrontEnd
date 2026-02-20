@@ -81,6 +81,29 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="nav navbar-nav pl-2">
 
+      <!-- ============================ RESOURCE ============================ -->
+
+      <li class="nav-item dropdown" style="padding-left: 5px">
+        <a class="nav-link dropdown-toggle" [routerLink]="['/#']" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <font style="color: white">{{ "Resource" | translate }}</font>
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+          <a class="dropdown-item" [routerLink]="['/resource']">
+            <i class="fa fa-database"></i> &nbsp;
+            {{ "Add Resource" | translate }}
+          </a>
+
+          <a class="dropdown-item" [routerLink]="['/resourcelist']">
+            <i class="fa fa-list"></i> &nbsp;
+            {{ "Resource List" | translate }}
+          </a>
+
+        </div>
+      </li>
+
       <!-- =================================== Shopping =========================================== -->
 
       <li class="nav-item dropdown" style="padding-left: 5px">
