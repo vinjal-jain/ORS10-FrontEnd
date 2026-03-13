@@ -1,0 +1,77 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid" style="padding-top:12%">
+
+  <h2 class="text-primary text-center">Candidate List</h2>
+
+  <div class="row justify-content-center mb-3">
+
+    <div class="col-sm-3">
+      <input class="form-control" [(ngModel)]="form.searchParams.candidateCode" placeholder="Search Code">
+    </div>
+
+    <div class="col-sm-3">
+      <input class="form-control" [(ngModel)]="form.searchParams.candidateName" placeholder="Search Name">
+    </div>
+
+    <div class="col-sm-2">
+      <button class="btn btn-primary w-100" (click)="submit()">Search</button>
+    </div>
+
+    <div class="col-sm-2">
+      <button class="btn btn-success w-100" (click)="forward('/candidate')">
+        Add Candidate
+      </button>
+    </div>
+
+    <div class="col-sm-2">
+      <button class="btn btn-danger w-100" (click)="deleteMany()">Delete</button>
+    </div>
+
+  </div>
+
+  <div *ngIf="form.error && form.message" class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{ form.message }}
+  </div>
+
+  <div *ngIf="!form.error && form.message" class="alert alert-success alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{ form.message }}
+  </div>
+
+  <table class="table table-bordered table-dark text-center">
+
+    <thead>
+      <tr>
+        <th><input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll($event)"></th>
+        <th>S.No</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Skill</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let m of form.list; let i=index">
+        <td><input type="checkbox" #checkboxes [id]="m.id" (change)="checklistUpdate()"></td>
+        <td>{{ (form.pageNo * 5) + i + 1 }}</td>
+        <td>{{ m.candidateCode }}</td>
+        <td>{{ m.candidateName }}</td>
+        <td>{{ m.email }}</td>
+        <td>{{ m.skillSet }}</td>
+
+        <td>
+          <button class="fa fa-edit text-primary" (click)="forward('/candidate/' + m.id)">
+          </button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>
+
+<app-footer></app-footer>

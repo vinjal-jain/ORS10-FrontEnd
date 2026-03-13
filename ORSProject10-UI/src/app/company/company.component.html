@@ -1,0 +1,117 @@
+<app-navbar></app-navbar>
+
+<style>
+  .grad {
+    background-image: linear-gradient(to bottom right, rgb(32, 168, 168), rgb(219, 231, 237));
+    background-size: 100%;
+    padding-bottom: 25px;
+  }
+
+  .background {
+    padding-top: 3%;
+    padding-bottom: 13%;
+    background: url('assets/files/wall.jpg') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  .required-field {
+    color: red;
+  }
+
+  .alertRedColor {
+    color: red;
+  }
+</style>
+
+<div class="container-fluid background" style="padding-top:12%">
+  <div class="row justify-content-center">
+    <div class="col-sm-8 col-md-6 col-lg-4">
+
+      <div class="card">
+        <div class="card-body shadow-lg grad">
+
+          <form name="companyForm">
+
+            <h2 *ngIf="!form.data.id" class="text-primary text-center font-weight-bold">
+              Add Company
+            </h2>
+
+            <h2 *ngIf="form.data.id" class="text-primary text-center font-weight-bold">
+              Update Company
+            </h2>
+
+            <!-- Messages -->
+            <div *ngIf="form.error && form.message" class="alert alert-danger alert-dismissible fade show">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ form.message }}
+            </div>
+
+            <div *ngIf="!form.error && form.message" class="alert alert-success alert-dismissible fade show">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{ form.message }}
+            </div>
+
+            <!-- Company Name -->
+            <div class="form-group pt-2">
+              <label><b>Company Name</b><span class="required-field">*</span></label>
+              <input type="text" name="companyName" [(ngModel)]="form.data.companyName" class="form-control"
+                placeholder="Enter Company Name">
+
+              <span *ngIf="form.inputerror.companyName" class="alertRedColor">
+                {{ form.inputerror.companyName }}
+              </span>
+            </div>
+
+            <!-- Industry -->
+            <div class="form-group pt-2">
+              <label><b>Industry</b><span class="required-field">*</span></label>
+              <input type="text" name="industry" [(ngModel)]="form.data.industry" class="form-control"
+                placeholder="Enter Industry">
+
+              <span *ngIf="form.inputerror.industry" class="alertRedColor">
+                {{ form.inputerror.industry }}
+              </span>
+            </div>
+
+            <!-- City -->
+           <div class="form-group pt-2">
+              <label><b>City</b><span class="required-field">*</span></label>
+              <select class="form-control" name="city" [(ngModel)]="form.data.city">
+                <option [ngValue]="undefined">Select City</option>
+                <option *ngFor="let c of form.preload.cityList | keyvalue" [value]="c.value">
+                  {{ c.value }}
+                </option>
+              </select>
+              <span *ngIf="form.inputerror.city" class="alertRedColor">
+                {{ form.inputerror.city }}
+              </span>
+            </div>
+
+            <!-- Buttons -->
+            <div class="text-center pt-3">
+
+              <button type="button" *ngIf="!form.data.id" (click)="submit()" class="btn btn-success mr-2">
+                Save
+              </button>
+
+              <button type="button" *ngIf="form.data.id" (click)="submit()" class="btn btn-success mr-2">
+                Update
+              </button>
+
+              <a class="btn btn-warning" [routerLink]="['/companylist']">
+                List
+              </a>
+
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

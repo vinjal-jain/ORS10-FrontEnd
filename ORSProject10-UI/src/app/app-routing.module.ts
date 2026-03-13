@@ -62,6 +62,14 @@ import { ShoppingComponent } from './shopping/shopping.component';
 import { ShoppingListComponent } from './shopping/shoppinglist.component';
 import { ResourceComponent } from './resource/resource.component';
 import { ResourcelistComponent } from './resource/resourcelist.component';
+import { PermissionComponent } from './permission/permission.component';
+import { PermissionlistComponent } from './permission/permissionlist.component';
+import { CandidatelistComponent } from './candidate/candidatelist.component';
+import { CandidateComponent } from './candidate/candidate.component';
+import { CompanyComponent } from './company/company.component';
+import { CompanylistComponent } from './company/companylist.component';
+import { TransportComponent } from './transport/transport.component';
+import { TransportlistComponent } from './transport/transportlist.component';
 
 
 const routes: Routes = [
@@ -76,6 +84,20 @@ const routes: Routes = [
     {
         path: 'dashboard',
         component: DashboardComponent
+    },
+
+
+    {
+        path: 'company',
+        component: CompanyComponent
+    },
+    {
+        path: 'company/:id',
+        component: CompanyComponent
+    },
+    {
+        path: 'companylist',
+        component: CompanylistComponent
     },
 
     // ***********ATM*************
@@ -243,8 +265,20 @@ const routes: Routes = [
         component: CustomerComponent
 
     },
+    // ***********Transport*************
 
-
+{
+  path: 'transport',
+  component: TransportComponent
+},
+{
+  path: 'transport/:id',
+  component: TransportComponent
+},
+{
+  path: 'transportlist',
+  component: TransportlistComponent
+},
 
 
     // ***********PRODUCT*************
@@ -496,18 +530,44 @@ const routes: Routes = [
     },
 
     {
-  path: 'resource',
-  component: ResourceComponent
-},
-{
-  path: 'resourcelist',
-  component: ResourcelistComponent
-},
-{
-  path: 'resource/:id',
-  component: ResourceComponent
+        path: 'resource',
+        component: ResourceComponent
+    },
+    {
+        path: 'resourcelist',
+        component: ResourcelistComponent
+    },
+    {
+        path: 'resource/:id',
+        component: ResourceComponent
 
-}
+    },
+
+
+    {
+        path: 'permission',
+        component: PermissionComponent
+    },
+    {
+        path: 'permission/:id',
+        component: PermissionComponent
+    },
+    {
+        path: 'permissionlist',
+        component: PermissionlistComponent
+    },
+    {
+        path: 'candidate',
+        component: CandidateComponent
+    },
+    {
+        path: 'candidate/:id',
+        component: CandidateComponent
+    },
+    {
+        path: 'candidate',
+        component: CandidatelistComponent
+    }
 
 
 

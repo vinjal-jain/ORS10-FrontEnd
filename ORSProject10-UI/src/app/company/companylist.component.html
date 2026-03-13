@@ -1,0 +1,95 @@
+<app-navbar></app-navbar>
+
+<div class="container-fluid" style="padding-top:12%">
+
+  <h2 class="text-primary text-center">Company List</h2>
+
+  <div class="row justify-content-center mb-3">
+
+    <div class="col-sm-3">
+      <input class="form-control" [(ngModel)]="form.searchParams.companyName" placeholder="Search Company">
+    </div>
+
+    <div class="col-sm-3">
+      <input class="form-control" [(ngModel)]="form.searchParams.city" placeholder="Search City">
+    </div>
+
+    <div class="col-sm-2">
+      <button class="btn btn-primary w-100" (click)="submit()">Search</button>
+    </div>
+
+    <div class="col-sm-2">
+      <button class="btn btn-success w-100" (click)="forward('/company')">
+        Add Company
+      </button>
+    </div>
+
+    <div class="col-sm-2">
+      <button class="btn btn-danger w-100" (click)="deleteMany()">Delete</button>
+    </div>
+
+  </div>
+
+  <div *ngIf="form.error && form.message" class="alert alert-danger alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{ form.message }}
+  </div>
+
+  <div *ngIf="!form.error && form.message" class="alert alert-success alert-dismissible fade show">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{ form.message }}
+  </div>
+
+  <table class="table table-bordered table-dark text-center">
+
+    <thead>
+      <tr>
+        <th><input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll($event)"></th>
+        <th>S.No</th>
+        <th>Company</th>
+        <th>Industry</th>
+        <th>City</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let c of form.list; let i=index">
+        <td><input type="checkbox" #checkboxes [id]="c.id" (change)="checklistUpdate()"></td>
+        <td>{{ (form.pageNo * 5) + i + 1 }}</td>
+        <td>{{ c.companyName }}</td>
+        <td>{{ c.industry }}</td>
+        <td>{{ c.city }}</td>
+        <td>
+          <button class="fa fa-edit text-primary" (click)="forward('/company/' + c.id)">
+          </button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+
+  <!-- Pagination + Reset -->
+    <div class="d-flex justify-content-between mt-3">
+
+      <button class="btn btn-info"
+        (click)="previous()" [disabled]="form.pageNo == 0">
+        Previous
+      </button>
+
+      <div>
+        <a class="btn btn-warning mr-1"
+           [routerLink]="['/companylist']"
+           (click)="exit()">
+          Reset
+        </a>
+      </div>
+
+      <button class="btn btn-info"
+        (click)="next()" [disabled]="nextList == 0">
+        Next
+      </button>
+
+</div>
+
+<app-footer></app-footer>

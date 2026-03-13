@@ -80,6 +80,14 @@ import { ShoppingComponent } from './shopping/shopping.component';
 import { ShoppingListComponent } from './shopping/shoppinglist.component';
 import { ResourceComponent } from './resource/resource.component';
 import { ResourcelistComponent } from './resource/resourcelist.component';
+import { PermissionComponent } from './permission/permission.component';
+import { PermissionlistComponent } from './permission/permissionlist.component';
+import { CandidateComponent } from './candidate/candidate.component';
+import { CandidatelistComponent } from './candidate/candidatelist.component';
+import { CompanyComponent } from './company/company.component';
+import { CompanylistComponent } from './company/companylist.component';
+import { TransportComponent } from './transport/transport.component';
+import { TransportlistComponent } from './transport/transportlist.component';
 
 
 
@@ -157,7 +165,15 @@ export function myHttpLoader(http: HttpClient) {
     ShoppingComponent,
     ShoppingListComponent,
     ResourceComponent,
-    ResourcelistComponent
+    ResourcelistComponent,
+    PermissionComponent,
+    PermissionlistComponent,
+    CandidateComponent,
+    CandidatelistComponent,
+    CompanyComponent,
+    CompanylistComponent,
+    TransportComponent,
+    TransportlistComponent
 
 
   ],

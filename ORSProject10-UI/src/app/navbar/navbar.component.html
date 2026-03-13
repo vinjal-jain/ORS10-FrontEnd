@@ -81,6 +81,92 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="nav navbar-nav pl-2">
 
+      <!-- ============================ TRANSPORT ============================ -->
+      <li class="nav-item dropdown" style="padding-left:5px">
+
+        <a class="nav-link dropdown-toggle" [routerLink]="['/#']" id="navbarDropdown" role="button"
+          data-toggle="dropdown">
+
+          <font style="color:white">Transport</font>
+
+        </a>
+
+        <div class="dropdown-menu">
+
+          <a class="dropdown-item" [routerLink]="['/transport']">
+            <i class="fa fa-truck"></i> &nbsp;
+            Add Transport
+          </a>
+
+          <a class="dropdown-item" [routerLink]="['/transportlist']">
+            <i class="fa fa-list"></i> &nbsp;
+            Transport List
+          </a>
+
+        </div>
+
+      </li>
+
+      <!-- ============================ CANDIDATE ============================ -->
+
+
+      <li class="nav-item dropdown" style="padding-left: 5px">
+        <a class="nav-link dropdown-toggle" [routerLink]="['/#']" role="button" data-toggle="dropdown">
+
+          <font style="color: white">Candidate</font>
+        </a>
+
+        <div class="dropdown-menu">
+          <a class="dropdown-item" [routerLink]="['/candidate']">
+            <i class="fa fa-user"></i> &nbsp; Add Candidate
+          </a>
+
+          <a class="dropdown-item" [routerLink]="['/candidatelist']">
+            <i class="fa fa-list"></i> &nbsp; Candidate List
+          </a>
+        </div>
+      </li>
+
+      <!-- ============================ COMPANY ============================ -->
+
+      <li class="nav-item dropdown" style="padding-left: 5px">
+        <a class="nav-link dropdown-toggle" [routerLink]="['/#']" id="navbarDropdown" role="button"
+          data-toggle="dropdown">
+          <font style="color: white">Company</font>
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+          <a class="dropdown-item" [routerLink]="['/company']">
+            <i class="fa fa-building"></i> &nbsp; Add Company
+          </a>
+
+          <a class="dropdown-item" [routerLink]="['/companylist']">
+            <i class="fa fa-list"></i> &nbsp; Company List
+          </a>
+
+        </div>
+      </li>
+
+      <!-- ============================ PERMISSION ============================ -->
+
+
+      <li class="nav-item dropdown" style="padding-left:5px">
+        <a class="nav-link dropdown-toggle" [routerLink]="['/#']" data-toggle="dropdown">
+          <font style="color:white">Permission</font>
+        </a>
+
+        <div class="dropdown-menu">
+          <a class="dropdown-item" [routerLink]="['/permission']">
+            <i class="fa fa-key"></i> Add Permission
+          </a>
+
+          <a class="dropdown-item" [routerLink]="['/permissionlist']">
+            <i class="fa fa-list"></i> Permission List
+          </a>
+        </div>
+      </li>
+
       <!-- ============================ RESOURCE ============================ -->
 
       <li class="nav-item dropdown" style="padding-left: 5px">

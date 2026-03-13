@@ -34,6 +34,13 @@ export class EndpointServiceService {
   public ATM = this.SERVER_URL + "/ATM";
   public SHOPPING = this.SERVER_URL + "/Shopping";
   public RESOURCE = this.SERVER_URL + "/Resource";
+  public PERMISSION = this.SERVER_URL + "/Permission";
+  public CANDIDATE = this.SERVER_URL + "/Candidate";
+  public COMPANY = this.SERVER_URL + "/Company";
+  public TRANSPORT = this.SERVER_URL + "/Transport";
+
+
+
 
 
 
